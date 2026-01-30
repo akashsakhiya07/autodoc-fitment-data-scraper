@@ -1,9 +1,9 @@
 # AutoDoc Part Fitment Data Scraper
 
 ## Project Overview
-This project was built to scrape **OEM part numbers** and their **vehicle compatibility details** from the AutoDoc website based on a given search term.  
+This project was built to scrape **OE part numbers** and their **vehicle compatibility details** from the AutoDoc website based on a given search term.  
 The client’s requirement was very specific:  
-- For each searched part number, collect **all OEM numbers** listed on the product page  
+- For each searched part number, collect **all OE numbers** listed on the product page  
 - Collect **all compatible vehicles** (across different car brands)  
 - Deliver the data in a **clean, Excel-friendly CSV format** with no missing or mixed data  
 
@@ -15,7 +15,7 @@ The main challenge was that the website is highly dynamic and protected by Cloud
 - Start from a search URL (example: part number search)
 - Handle multiple products returned by the search (53 products in this case)
 - For each product:
-  - Extract all OEM numbers (sometimes a few, sometimes more than 100)
+  - Extract all OE numbers (sometimes a few, sometimes more than 100)
   - Extract all compatibility entries across multiple car brands
 - Output format had to be **column-aligned**, so the client could directly open it in Excel and understand it without post-processing
 
@@ -25,15 +25,15 @@ The main challenge was that the website is highly dynamic and protected by Cloud
 The final CSV format strictly follows this rule:
 
 - Columns:
-  - `OEM Number`
+  - `OE Number`
   - `Compatibility`
-- Number of rows per product = **max(OEM count, Compatibility count)**
+- Number of rows per product = **max(OE count, Compatibility count)**
 - If one column has fewer values:
   - The remaining rows are left blank in that column
 - This ensures:
   - No data is lost
   - Excel view remains readable and consistent
-  - OEM numbers and compatibility data are never merged incorrectly
+  - OE numbers and compatibility data are never merged incorrectly
 
 Each product is saved as a **separate CSV file**, making it easy for the client to review or share individual results.
 
@@ -43,7 +43,7 @@ Each product is saved as a **separate CSV file**, making it easy for the client 
 AutoDoc does not load all data at once:
 - Search results use a **“Load more”** system instead of full page reloads
 - Product pages load data dynamically with JavaScript
-- OEM numbers sometimes appear partially and require clicking a **“More”** button
+- OE numbers sometimes appear partially and require clicking a **“More”** button
 - Compatibility data is hidden under expandable brand sections (only one brand opens at a time)
 
 All of these behaviors were handled carefully using explicit waits, visibility checks, and controlled retries.
@@ -87,7 +87,7 @@ For this project, Playwright proved to be the safer and more production-ready ch
 
 ## Result
 - All 53 products scraped successfully
-- No missing OEM numbers
+- No missing OE numbers
 - No missing compatibility entries
 - Output matches the exact format requested by the client
 - Ready to be shared directly with non-technical users
