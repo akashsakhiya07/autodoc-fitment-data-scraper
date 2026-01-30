@@ -1,0 +1,13 @@
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtual environment
+venv/
+
+# Playwright browser data / sessions
+user_data/
+
+# Output files and folders
+output/
